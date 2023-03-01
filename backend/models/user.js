@@ -22,15 +22,40 @@ const userSchema = new mongoose.Schema({
     minLength: [6, "Your password must have at least 6 characters"],
     select: [false],
   },
+  phone: {
+    type: String,
+    required: [true, "Please enter your phone number"],
+    maxLength: [10, "Your phone number cannot exceed 11 characters"],
+  },
   avatar: {
     public_id: {
       type: String,
-      required: [true, "Please upload a profile picture"]
+      // required: [true, "Please upload a profile picture"]
     },
     url: {
       type: String,
-      required: [true, "Please upload a profile picture"]
+      // required: [true, "Please upload a profile picture"]
     },
+  },
+  branch: {
+    type: String,
+    required: [true, "Please enter your branch"],
+  },
+  year: {
+    type: Number,
+    required: [true, "Please enter your year"],
+  },
+  skills: {
+    type: [],
+  },
+  company: {
+    type: String,
+  },
+  linkedin: {
+    type: String,
+  },
+  github: {
+    type: String,
   },
   createdAt: {
     type: Date,
@@ -53,7 +78,7 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// return JSON Web Tocken(jwt)
+// return JSON Web Token(jwt)
 userSchema.methods.getJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_TIME,

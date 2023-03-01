@@ -26,7 +26,7 @@ connectDatabase();
 
 const server = app.listen(process.env.PORT, () => {
   console.log(
-    `Server started on the PORT: ${process.env.PORT}`
+    `Server started on PORT: ${process.env.PORT}`
   );
 });
 
