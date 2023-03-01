@@ -3,11 +3,10 @@ const app = express();
 const bodyparser = require("body-parser");
 //const fileUpload = require("express-fileupload");
 const path = require("path");
-
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
-// const errorMiddleware = require("./middlewares/errors");
+const errorMiddleware = require("./middleWares/errors");
 
 
 //setting up config file
@@ -19,12 +18,12 @@ app.use(bodyparser.urlencoded({ extended: true }))
 app.use(cookieParser());
 //app.use(fileUpload());
 
-
+const userRoutes = require("./routes/auth");
 
 // import all routes here
-
+app.use("/api/v1/", userRoutes);
 
 // middleware to handle errors
-//app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 module.exports = app;
